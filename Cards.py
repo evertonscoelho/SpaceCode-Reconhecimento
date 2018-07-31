@@ -27,7 +27,7 @@ font = cv2.FONT_HERSHEY_SIMPLEX
 class Query_command:
     def __init__(self):
         self.contour = [] 
-        self.width, self.height = 0, 0 
+        self.width, self.height, self.x, self.y = 0, 0, 0, 0
         self.corner_pts = [] 
         self.center = [] 
         self.warp = []
@@ -59,46 +59,17 @@ def preprocess_image(image):
     return thresh
 
 def find_cards(thresh_image):
-    # Find contours and sort their indices by contour size
     dummy,cnts,hier = cv2.findContours(thresh_image,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
-    index_sort = sorted(range(len(cnts)), key=lambda i : cv2.contourArea(cnts[i]),reverse=True)
-
-    # If there are no contours, do nothing
-    if len(cnts) == 0:
-        return [], []
-    
-    # Otherwise, initialize empty sorted contour and hierarchy lists
-    cnts_sort = []
-    hier_sort = []
     cnt_is_card = np.zeros(len(cnts),dtype=int)
-
-    # Fill empty lists with sorted contour and sorted hierarchy. Now,
-    # the indices of the contour list still correspond with those of
-    # the hierarchy list. The hierarchy array can be used to check if
-    # the contours have parents or not.
-    for i in index_sort:
-        cnts_sort.append(cnts[i])
-        hier_sort.append(hier[0][i])
-
-    # Determine which of the contours are cards by applying the
-    # following criteria: 1) Smaller area than the maximum card size,
-    # 2), bigger area than the minimum card size, 3) have no parents,
-    # and 4) have four corners
-    teste = 0;
-    for i in range(len(cnts_sort)):
-        size = cv2.contourArea(cnts_sort[i])
-        peri = cv2.arcLength(cnts_sort[i],True)
-        approx = cv2.approxPolyDP(cnts_sort[i],0.01*peri,True)
-        (x, y, w, h) = cv2.boundingRect(approx)
-        ar = w / float(h)
-        
-
+    
+    for i in range(len(cnts)):
+        size = cv2.contourArea(cnts[i])
+        peri = cv2.arcLength(cnts[i],True)
+        approx = cv2.approxPolyDP(cnts[i],0.01*peri,True)
         if len(approx) == 4 and (size < CARD_MAX_AREA) and (size > CARD_MIN_AREA):
             cnt_is_card[i] = 1
-            teste = teste +1;
-      
-    print(teste)
-    return cnts_sort, cnt_is_card
+    
+    return cnts, cnt_is_card
 
 def preprocess_card(contour, image):
     qCommand = Query_command()
@@ -112,8 +83,7 @@ def preprocess_card(contour, image):
     qCommand.corner_pts = pts
 
     # Find width and height of card's bounding rectangle
-    x,y,w,h = cv2.boundingRect(contour)
-    qCommand.width, qCommand.height = w, h
+    qCommand.width, qCommand.height,qCommand.x, qCommand.y = cv2.boundingRect(contour)
 
     # Find center point of card by taking x and y average of the four corners.
     average = np.sum(pts, axis=0)/len(pts)
@@ -122,7 +92,7 @@ def preprocess_card(contour, image):
     qCommand.center = [cent_x, cent_y]
 
     # Warp card into 200x300 flattened image using perspective transform
-    qCommand.warp = flattener(image, pts, w, h)
+    qCommand.warp = flattener(image, pts, qCommand.width, qCommand.height)
 
     # Grab corner of warped card image and do a 4x zoom
     Qcorner = qCommand.warp[0:CORNER_HEIGHT, 0:CORNER_WIDTH]

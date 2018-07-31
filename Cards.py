@@ -47,7 +47,7 @@ def load_commands(filepath):
     for Command in ['Down','F1','F2','F3','Left','Right','Up']:
         train_commands.append(Train_command())
         train_commands[i].name = Command
-        filename = Command + '.png'
+        filename = Command + '.jpg'
         train_commands[i].img = cv2.imread(filepath+filename, cv2.IMREAD_GRAYSCALE)
         i = i + 1
     return train_commands
@@ -61,7 +61,7 @@ def preprocess_image(image):
 def find_cards(thresh_image):
     dummy,cnts,hier = cv2.findContours(thresh_image,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
     cnt_is_card = np.zeros(len(cnts),dtype=int)
-    
+
     for i in range(len(cnts)):
         size = cv2.contourArea(cnts[i])
         peri = cv2.arcLength(cnts[i],True)

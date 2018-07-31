@@ -12,15 +12,15 @@ image = cv2.imread('1.jpeg')
 pre_proc = Cards.preprocess_image(image)
 cv2.imwrite(path+"/testePre.jpeg", pre_proc);
 
-cnts_sort, cnt_is_card = Cards.find_cards(pre_proc)
+cnts, cnt_is_card = Cards.find_cards(pre_proc)
 
-if len(cnts_sort) != 0:
+if len(cnts) != 0:
     cards = []
     k = 0
     # For each contour detected:
-    for i in range(len(cnts_sort)):
+    for i in range(len(cnts)):
         if (cnt_is_card[i] == 1):
-            cards.append(Cards.preprocess_card(cnts_sort[i],image))
+            cards.append(Cards.preprocess_card(cnts[i],image))
             #cards[k].best_command_match, cards[k].diff = Cards.match_card(cards[k],train_commands)
             k = k + 1
    

@@ -1,21 +1,18 @@
 import numpy as np
 import cv2
 import time
+import os
 
 ### Constants ###
 
 # Adaptive threshold levels
 CARD_THRESH = 30
 
-# Width and height of card corner, where rank and suit are
-CORNER_WIDTH = 32
-CORNER_HEIGHT = 84
-
 # Dimensions of rank train images
-RANK_WIDTH = 70
-RANK_HEIGHT = 125
+COMMAND_WIDTH = 168
+COMMAND_HEIGHT = 148
 
-RANK_DIFF_MAX = 2000
+RANK_DIFF_MAX = 200000
 
 COMMAND_MAX_AREA = 120000
 COMMAND_MIN_AREA = 40
@@ -55,7 +52,7 @@ def preprocess_image(image):
     thresh = cv2.adaptiveThreshold(blur,255,cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY,11,2)
     return thresh
 
-def find_commands(thresh_image, image):
+def find_commands(thresh_image, image, train_commands):
     dummy,cnts,hier = cv2.findContours(thresh_image,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
     commands = []
     for i in range(len(cnts)):
@@ -63,22 +60,27 @@ def find_commands(thresh_image, image):
         peri = cv2.arcLength(cnts[i],True)
         approx = cv2.approxPolyDP(cnts[i],0.01*peri,True)
         if len(approx) == 4 and (size < COMMAND_MAX_AREA) and (size > COMMAND_MIN_AREA):
-            commands.append(preprocess_command(cnts[i],image))
+            qCommand = Query_command()
+            qCommand = preprocess_command(cnts[i],image)
+            best_command_match, diff = match_command(qCommand,train_commands)
+            if(best_command_match != "Unknown"):
+                qCommand.best_command_match, qCommand.diff = best_command_match, diff
+                commands.append(qCommand)
     return commands
 
 def match_command(qCommand, train_command):
-    best_command_match_diff = 10000
+    best_command_match_diff = 10000000000
     best_command_match_name = "Unknown"
     i = 0
+    cv2.imwrite("/home/everton/OpenCV-Playing-Card-Detector/teste/imagemQuadrado.jpeg", qCommand.command_img);
     if (len(qCommand.command_img) != 0):
         for Tcommand in train_command:
-            diff_img = cv2.absdiff(qCommand.command_img, Tcommand.img)
+            cv2.imwrite("/home/everton/OpenCV-Playing-Card-Detector/teste/imagemReconhecer.jpeg", Tcommand.img);
+            diff_img = cv2.absdiff(Tcommand.img, qCommand.command_img)
             command_diff = int(np.sum(diff_img)/255)
-                
             if command_diff < best_command_match_diff:
                 best_command_match_diff = command_diff
                 best_command_name = Tcommand.name
-
     if (best_command_match_diff < RANK_DIFF_MAX):
         best_command_match_name = best_command_name
     return best_command_match_name, best_command_match_diff
@@ -99,27 +101,8 @@ def preprocess_command(contour, image):
     cent_y = int(average[0][1])
     qCommand.center = [cent_x, cent_y]
     # Warp card into 200x300 flattened image using perspective transform
-    qCommand.warp = flattener(image, pts, qCommand.width, qCommand.height)
-    # Grab corner of warped card image and do a 4x zoom
-    Qcorner = qCommand.warp[0:CORNER_HEIGHT, 0:CORNER_WIDTH]
-    Qcorner_zoom = cv2.resize(Qcorner, (0,0), fx=4, fy=4)
-    # Sample known white pixel intensity to determine good threshold level
-    white_level = Qcorner_zoom[15,int((CORNER_WIDTH*4)/2)]
-    thresh_level = white_level - CARD_THRESH
-    if (thresh_level <= 0):
-        thresh_level = 1
-    retval, query_thresh = cv2.threshold(Qcorner_zoom, thresh_level, 255, cv2. THRESH_BINARY_INV)
-    Qcommand = query_thresh[20:185, 0:128]
-    # Find rank contour and bounding rectangle, isolate and find largest contour
-    dummy, Qcommand_cnts, hier = cv2.findContours(Qcommand, cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
-    Qcommand_cnts = sorted(Qcommand_cnts, key=cv2.contourArea,reverse=True)
-    # Find bounding rectangle for largest contour, use it to resize query rank
-    # image to match dimensions of the train rank image
-    if len(Qcommand_cnts) != 0:
-        x1,y1,w1,h1 = cv2.boundingRect(Qcommand_cnts[0])
-        Qcommand_roi = Qcommand[y1:y1+h1, x1:x1+w1]
-        Qcommand_sized = cv2.resize(Qcommand_roi, (RANK_WIDTH,RANK_HEIGHT), 0, 0)
-        qCommand.command_img = Qcommand_sized
+    qCommand.command_img = flattener(image, pts, qCommand.width, qCommand.height)
+    cv2.imwrite("/home/everton/OpenCV-Playing-Card-Detector/teste/lol.jpeg", qCommand.command_img);
     return qCommand
 
 def flattener(image, pts, w, h):
@@ -151,8 +134,8 @@ def flattener(image, pts, w, h):
             temp_rect[1] = pts[3][0] 
             temp_rect[2] = pts[2][0] 
             temp_rect[3] = pts[1][0]         
-    maxWidth = 200
-    maxHeight = 300
+    maxWidth = 168
+    maxHeight = 148
     dst = np.array([[0,0],[maxWidth-1,0],[maxWidth-1,maxHeight-1],[0, maxHeight-1]], np.float32)
     M = cv2.getPerspectiveTransform(temp_rect,dst)
     warp = cv2.warpPerspective(image, M, (maxWidth, maxHeight))

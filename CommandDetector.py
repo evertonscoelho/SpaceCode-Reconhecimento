@@ -7,12 +7,14 @@ import Command
 path = os.path.dirname(os.path.abspath(__file__))
 train_commands = Command.load_commands( path + '/Commands_Imgs/')
 
-image = cv2.imread('1.jpeg')
+image = cv2.imread('11.jpeg')
 
 pre_proc = Command.preprocess_image(image)
 cv2.imwrite(path+"/testePre.jpeg", pre_proc);
 
-commands = Command.find_commands(pre_proc, image, train_commands)
+cnts = Command.find_cnts_commands(pre_proc)
+commands = Command.find_commands(cnts, image, train_commands)
+#commands = Command.order_commands(commands)
    
 for i in range(len(commands)):
     temp_cnts = []

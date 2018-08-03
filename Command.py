@@ -12,7 +12,7 @@ CARD_THRESH = 30
 COMMAND_WIDTH = 168
 COMMAND_HEIGHT = 148
 
-RANK_DIFF_MAX = 200000
+RANK_DIFF_MAX = 200000000
 
 COMMAND_MAX_AREA = 120000
 COMMAND_MIN_AREA = 40
@@ -49,30 +49,45 @@ def load_commands(filepath):
 def preprocess_image(image):
     gray = cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
     blur = cv2.GaussianBlur(gray,(5,5),0)
-    thresh = cv2.adaptiveThreshold(blur,255,cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY,11,2)
+    #thresh = cv2.adaptiveThreshold(blur,255,cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY,11,2)
+    retval, thresh = cv2.threshold(blur, 100, 255, cv2.THRESH_BINARY)
+    cv2.imwrite("/home/everton/OpenCV-Playing-Card-Detector/teste/oi.jpeg", thresh);
     return thresh
 
-def find_commands(thresh_image, image, train_commands):
+def find_cnts_commands(thresh_image):
     dummy,cnts,hier = cv2.findContours(thresh_image,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
-    commands = []
+    cnts_return = []    
+    print(len(cnts))
     for i in range(len(cnts)):
         size = cv2.contourArea(cnts[i])
         peri = cv2.arcLength(cnts[i],True)
         approx = cv2.approxPolyDP(cnts[i],0.01*peri,True)
         if len(approx) == 4 and (size < COMMAND_MAX_AREA) and (size > COMMAND_MIN_AREA):
-            qCommand = Query_command()
-            qCommand = preprocess_command(cnts[i],image)
-            best_command_match, diff = match_command(qCommand,train_commands)
-            if(best_command_match != "Unknown"):
-                qCommand.best_command_match, qCommand.diff = best_command_match, diff
-                commands.append(qCommand)
+              cnts_return.append(cnts[i])  
+    return cnts_return
+
+def find_commands(cnts, image, train_commands):
+    if len(cnts) == 0:
+        return []
+    cnts = sort_contours(cnts, method="top-to-bottom")
+    #ordena os y; verifica faixa aceitavel de y; do menor, percorre e vai separando em linhas pelo y; dentro de cada linha, ordena o x;    
+    commands = []
+    for i in range(len(cnts)):
+        qCommand = Query_command()
+        qCommand = preprocess_command(cnts[i],image)
+        qCommand.teste = i
+        best_command_match, diff = match_command(qCommand,train_commands, i)
+        if(best_command_match != "Unknown"):
+            qCommand.best_command_match, qCommand.diff = best_command_match, diff
+            commands.append(qCommand)
     return commands
 
-def match_command(qCommand, train_command):
-    best_command_match_diff = 10000000000
+def match_command(qCommand, train_command, a):
+    best_command_match_diff = 1000000000
     best_command_match_name = "Unknown"
     i = 0
-    cv2.imwrite("/home/everton/OpenCV-Playing-Card-Detector/teste/imagemQuadrado.jpeg", qCommand.command_img);
+    retval, qCommand.command_img = cv2.threshold(qCommand.command_img, 100, 255, cv2. THRESH_BINARY)
+    cv2.imwrite("/home/everton/OpenCV-Playing-Card-Detector/teste/imagemQuadrado"+str(a)+".jpeg", qCommand.command_img);
     if (len(qCommand.command_img) != 0):
         for Tcommand in train_command:
             cv2.imwrite("/home/everton/OpenCV-Playing-Card-Detector/teste/imagemReconhecer.jpeg", Tcommand.img);
@@ -100,10 +115,16 @@ def preprocess_command(contour, image):
     cent_x = int(average[0][0])
     cent_y = int(average[0][1])
     qCommand.center = [cent_x, cent_y]
-    # Warp card into 200x300 flattened image using perspective transform
     qCommand.command_img = flattener(image, pts, qCommand.width, qCommand.height)
-    cv2.imwrite("/home/everton/OpenCV-Playing-Card-Detector/teste/lol.jpeg", qCommand.command_img);
     return qCommand
+
+def sort_contours(cnts, method="left-to-right"):
+    i = 0
+    if method == "top-to-bottom":
+        i = 1
+    boundingBoxes = [cv2.boundingRect(c) for c in cnts]
+    (cnts, boundingBoxes) = zip(*sorted(zip(cnts, boundingBoxes), key=lambda b:b[1][i], reverse=False))
+    return cnts
 
 def flattener(image, pts, w, h):
     temp_rect = np.zeros((4,2), dtype = "float32")

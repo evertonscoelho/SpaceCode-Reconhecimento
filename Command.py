@@ -12,7 +12,7 @@ CARD_THRESH = 30
 COMMAND_WIDTH = 168
 COMMAND_HEIGHT = 148
 
-RANK_DIFF_MAX = 200000000
+RANK_DIFF_MAX = 10000
 
 COMMAND_MAX_AREA = 120000
 COMMAND_MIN_AREA = 40
@@ -49,15 +49,12 @@ def load_commands(filepath):
 def preprocess_image(image):
     gray = cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
     blur = cv2.GaussianBlur(gray,(5,5),0)
-    #thresh = cv2.adaptiveThreshold(blur,255,cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY,11,2)
     retval, thresh = cv2.threshold(blur, 100, 255, cv2.THRESH_BINARY)
-    cv2.imwrite("/home/everton/OpenCV-Playing-Card-Detector/teste/oi.jpeg", thresh);
     return thresh
 
 def find_cnts_commands(thresh_image):
     dummy,cnts,hier = cv2.findContours(thresh_image,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
     cnts_return = []    
-    print(len(cnts))
     for i in range(len(cnts)):
         size = cv2.contourArea(cnts[i])
         peri = cv2.arcLength(cnts[i],True)
@@ -96,6 +93,7 @@ def match_command(qCommand, train_command, a):
             if command_diff < best_command_match_diff:
                 best_command_match_diff = command_diff
                 best_command_name = Tcommand.name
+    print(best_command_match_diff)    
     if (best_command_match_diff < RANK_DIFF_MAX):
         best_command_match_name = best_command_name
     return best_command_match_name, best_command_match_diff
@@ -134,30 +132,16 @@ def flattener(image, pts, w, h):
     diff = np.diff(pts, axis = -1)
     tr = pts[np.argmin(diff)]
     bl = pts[np.argmax(diff)]
-    if w <= 0.8*h: 
-        temp_rect[0] = tl
-        temp_rect[1] = tr
-        temp_rect[2] = br
-        temp_rect[3] = bl
-    if w >= 1.2*h: 
-        temp_rect[0] = bl
-        temp_rect[1] = tl
-        temp_rect[2] = tr
-        temp_rect[3] = br
-    if w > 0.8*h and w < 1.2*h: 
-        if pts[1][0][1] <= pts[3][0][1]:
-            temp_rect[0] = pts[1][0] 
-            temp_rect[1] = pts[0][0] 
-            temp_rect[2] = pts[3][0] 
-            temp_rect[3] = pts[2][0] 
-        if pts[1][0][1] > pts[3][0][1]:
-            temp_rect[0] = pts[0][0] 
-            temp_rect[1] = pts[3][0] 
-            temp_rect[2] = pts[2][0] 
-            temp_rect[3] = pts[1][0]         
+    
+    temp_rect[0] = tl
+    temp_rect[1] = tr
+    temp_rect[2] = br
+    temp_rect[3] = bl
+
     maxWidth = 168
     maxHeight = 148
     dst = np.array([[0,0],[maxWidth-1,0],[maxWidth-1,maxHeight-1],[0, maxHeight-1]], np.float32)
+ 
     M = cv2.getPerspectiveTransform(temp_rect,dst)
     warp = cv2.warpPerspective(image, M, (maxWidth, maxHeight))
     warp = cv2.cvtColor(warp,cv2.COLOR_BGR2GRAY)

@@ -12,10 +12,12 @@ CARD_THRESH = 30
 COMMAND_WIDTH = 168
 COMMAND_HEIGHT = 148
 
-RANK_DIFF_MAX = 10000
+RANK_DIFF_MAX = 4500
 
 COMMAND_MAX_AREA = 120000
 COMMAND_MIN_AREA = 40
+
+
 
 font = cv2.FONT_HERSHEY_SIMPLEX
 
@@ -67,16 +69,21 @@ def find_commands(cnts, image, train_commands):
     if len(cnts) == 0:
         return []
     cnts = sort_contours(cnts, method="top-to-bottom")
+
+    cnts = orderLines(cnts)
+    
     #ordena os y; verifica faixa aceitavel de y; do menor, percorre e vai separando em linhas pelo y; dentro de cada linha, ordena o x;    
-    commands = []
-    for i in range(len(cnts)):
-        qCommand = Query_command()
-        qCommand = preprocess_command(cnts[i],image)
-        qCommand.teste = i
-        best_command_match, diff = match_command(qCommand,train_commands, i)
-        if(best_command_match != "Unknown"):
-            qCommand.best_command_match, qCommand.diff = best_command_match, diff
-            commands.append(qCommand)
+
+    commands = [][]
+    for y in range(len(cnts)): 
+        cnts[y] = sort_contours(cnts[y])        
+        for x in range(len(cnts[y])):
+            qCommand = Query_command()
+            qCommand = preprocess_command(cnts[y][x],image)
+            best_command_match, diff = match_command(qCommand,train_commands, i)
+            if(best_command_match != "Unknown"):
+                qCommand.best_command_match, qCommand.diff = best_command_match, diff
+                commands.append(qCommand)
     return commands
 
 def match_command(qCommand, train_command, a):
@@ -84,16 +91,13 @@ def match_command(qCommand, train_command, a):
     best_command_match_name = "Unknown"
     i = 0
     retval, qCommand.command_img = cv2.threshold(qCommand.command_img, 100, 255, cv2. THRESH_BINARY)
-    cv2.imwrite("/home/everton/OpenCV-Playing-Card-Detector/teste/imagemQuadrado"+str(a)+".jpeg", qCommand.command_img);
     if (len(qCommand.command_img) != 0):
         for Tcommand in train_command:
-            cv2.imwrite("/home/everton/OpenCV-Playing-Card-Detector/teste/imagemReconhecer.jpeg", Tcommand.img);
             diff_img = cv2.absdiff(Tcommand.img, qCommand.command_img)
             command_diff = int(np.sum(diff_img)/255)
             if command_diff < best_command_match_diff:
                 best_command_match_diff = command_diff
                 best_command_name = Tcommand.name
-    print(best_command_match_diff)    
     if (best_command_match_diff < RANK_DIFF_MAX):
         best_command_match_name = best_command_name
     return best_command_match_name, best_command_match_diff

@@ -70,23 +70,17 @@ def find_commands(cnts, image, train_commands):
         return []
     cnts = sort_contours(cnts, method="top-to-bottom")
 
-    cnts = orderLines(cnts)
-    
-    #ordena os y; verifica faixa aceitavel de y; do menor, percorre e vai separando em linhas pelo y; dentro de cada linha, ordena o x;    
-
-    commands = [][]
+    commands = []
     for y in range(len(cnts)): 
-        cnts[y] = sort_contours(cnts[y])        
-        for x in range(len(cnts[y])):
-            qCommand = Query_command()
-            qCommand = preprocess_command(cnts[y][x],image)
-            best_command_match, diff = match_command(qCommand,train_commands, i)
-            if(best_command_match != "Unknown"):
-                qCommand.best_command_match, qCommand.diff = best_command_match, diff
-                commands.append(qCommand)
+        qCommand = Query_command()
+        qCommand = preprocess_command(cnts[y],image)
+        best_command_match, diff = match_command(qCommand,train_commands)
+        if(best_command_match != "Unknown"):
+            qCommand.best_command_match, qCommand.diff = best_command_match, diff
+            commands.append(qCommand)
     return commands
 
-def match_command(qCommand, train_command, a):
+def match_command(qCommand, train_command):
     best_command_match_diff = 1000000000
     best_command_match_name = "Unknown"
     i = 0

@@ -16,6 +16,8 @@ for linha in textInput:
 	split = linha.split(";")
 	nameFile = split[0]
 	resultExpected = split[1]
+	resultExpected = resultExpected.replace("\n", "")
+
 
 	image = cv2.imread(pathTeste + nameFile)
 	pre_proc = Command.preprocess_image(image)
@@ -27,13 +29,23 @@ for linha in textInput:
 		train_commands = Command.load_commands( path + '/Commands_Imgs_Black_Backgroud/')
 		commands = Command.find_commands(cnts, image, train_commands)
 		response = Command.responseCommands(commands)
-	textOutput = textOutput + nameFile +";"
-	textOutput = textOutput + response +";"
-	if response.equals(resultExpected):
-		textOutput = textOutput + "1\n"
+
+	if response == resultExpected:
+		textOutput = textOutput + "1;"
 	else:
-		textOutput = textOutput +"0\n"
+		textOutput = textOutput +"0;"
+	textOutput = textOutput + nameFile +";"
+	textOutput = textOutput + response +"\n"
+
+	temp_cnts = []
+	for i in range(len(commands)):
+		temp_cnts.append(commands[i].contour)
+		cv2.drawContours(image,temp_cnts, -1, (255,0,0), 2)
+		cv2.putText(image,commands[i].best_command_match,(commands[i].center[0]-60, commands[i].center[1]+25),cv2.FONT_HERSHEY_SIMPLEX,1,(0,0,0),3,cv2.LINE_AA)
+		cv2.imwrite(path+"/testeResultado"+ nameFile +".jpeg", image); 
+    
 
 arqOutput = open(pathTeste+"testOutput.txt", 'w')
 arqOutput.write(textOutput)
 arqOutput.close()
+

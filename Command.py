@@ -12,7 +12,7 @@ CARD_THRESH = 30
 COMMAND_WIDTH = 168
 COMMAND_HEIGHT = 148
 
-RANK_DIFF_MAX = 4500
+RANK_DIFF_MAX = 4000
 
 COMMAND_MAX_AREA = 120000
 COMMAND_MIN_AREA = 40
@@ -69,7 +69,6 @@ def find_commands(cnts, image, train_commands):
     if len(cnts) == 0:
         return []
     cnts = sort_contours(cnts, method="top-to-bottom")
-
     commands = []
     for y in range(len(cnts)): 
         qCommand = Query_command()
@@ -79,6 +78,25 @@ def find_commands(cnts, image, train_commands):
             qCommand.best_command_match, qCommand.diff = best_command_match, diff
             commands.append(qCommand)
     return commands
+
+    if len(commands) == 0:
+        return []
+    
+    command_order = []
+    line_command  = []
+    limitY = commands[0].center[1] + 15
+    for command in commands:
+        if(command.center[1] < limitY):
+            line_command.append(command)
+        else:
+            limitY = command.center[1] + 15
+            line_command = sort_contours(line_command)
+            command_order.append(line_command)
+            line_command = []
+            line_command.append(command)
+    line_command = sort_contours(line_command)
+    command_order.append(line_command)
+    return command_order
 
 def match_command(qCommand, train_command):
     best_command_match_diff = 1000000000
@@ -95,6 +113,22 @@ def match_command(qCommand, train_command):
     if (best_command_match_diff < RANK_DIFF_MAX):
         best_command_match_name = best_command_name
     return best_command_match_name, best_command_match_diff
+
+def responseCommands(commands):
+    return ""
+    response = ""
+    if len(commands) == 0:
+        return "Unknown"
+    for y in range(len(commands)): 
+        for x in range(len(commands[y])): 
+            if x != len(commands[y])-1:
+                response = response + commands[y][x].best_command_match +","
+            else:
+                response = response + commands[y][x].best_command_match
+        if y != len(commands)-1:
+            response = response + ",NEXT,"
+    return response
+    
 
 def preprocess_command(contour, image):
     qCommand = Query_command()

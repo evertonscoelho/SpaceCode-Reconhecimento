@@ -17,6 +17,8 @@ RANK_DIFF_MAX = 4000
 COMMAND_MAX_AREA = 120000
 COMMAND_MIN_AREA = 40
 
+LIMIT_Y_LINE = 100
+
 
 
 font = cv2.FONT_HERSHEY_SIMPLEX
@@ -72,13 +74,13 @@ def find_commands(cnts, image, train_commands):
     cnts_order = []
     line_cnts  = []
     center, pts = define_center(cnts[0])
-    limitY = center[1] + 15    
+    limitY = center[1] + LIMIT_Y_LINE    
     for i in range(len(cnts)):
         center, pts = define_center(cnts[i])
         if(center[1] < limitY):
             line_cnts.append(cnts[i])
         else:
-            limitY = center[1] + 15
+            limitY = center[1] + LIMIT_Y_LINE
             line_cnts = sort_contours(line_cnts)
             cnts_order.append(line_cnts)
             line_cnts = []

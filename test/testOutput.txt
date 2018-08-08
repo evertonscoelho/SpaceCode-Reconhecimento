@@ -1,1 +1,8 @@
 0;1.jpeg;F1,Right,F1,F3,NEXT,F1,Down,Up,Left,Left
+0;2.jpeg;F1,Right,F1,F3,NEXT,F1,Down,Up,Left,Left
+0;3.jpeg;F1,Right,F1,F3,NEXT,F1,Down,Up,Left,Left
+0;4.jpeg;F2,F1,F3,F1
+1;5.jpeg;F1,F2,F3
+0;6.jpeg;F2,F1,F1,F3,NEXT,F1
+0;7.jpeg;F1
+0;8.jpeg;F2,NEXT,Left

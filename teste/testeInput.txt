@@ -1,8 +1,0 @@
-1.jpeg;F1,Right,F2,F3\nF2,Down,Up,Left,Left
-2.jpeg;F1,Right,F2,F3\nF2,Down,Up,Left,Left
-3.jpeg;F1,Right,F2,F3\nF2,Down,Up,Left,Left
-4.jpeg;F2,F1,F3
-5.jpeg;F1,F2,F3
-6.jpeg;F2,F1,F3
-7.jpeg;Unknown
-8.jpeg;Unknown

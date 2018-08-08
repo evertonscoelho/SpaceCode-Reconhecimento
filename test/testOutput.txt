@@ -1,1 +1,1 @@
-0;1.jpeg;
+0;1.jpeg;F1,Right,F1,F3,NEXT,F1,Down,Up,Left,Left

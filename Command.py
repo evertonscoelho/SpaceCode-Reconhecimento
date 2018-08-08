@@ -25,7 +25,6 @@ class Query_command:
     def __init__(self):
         self.contour = [] 
         self.width, self.height, self.x, self.y = 0, 0, 0, 0
-        self.corner_pts = [] 
         self.center = [] 
         self.warp = []
         self.command_img = [] 
@@ -69,34 +68,38 @@ def find_commands(cnts, image, train_commands):
     if len(cnts) == 0:
         return []
     cnts = sort_contours(cnts, method="top-to-bottom")
-    commands = []
-    for y in range(len(cnts)): 
-        qCommand = Query_command()
-        qCommand = preprocess_command(cnts[y],image)
-        best_command_match, diff = match_command(qCommand,train_commands)
-        if(best_command_match != "Unknown"):
-            qCommand.best_command_match, qCommand.diff = best_command_match, diff
-            commands.append(qCommand)
-    return commands
 
-    if len(commands) == 0:
-        return []
-    
-    command_order = []
-    line_command  = []
-    limitY = commands[0].center[1] + 15
-    for command in commands:
-        if(command.center[1] < limitY):
-            line_command.append(command)
+    cnts_order = []
+    line_cnts  = []
+    center, pts = define_center(cnts[0])
+    limitY = center[1] + 15    
+    for i in range(len(cnts)):
+        center, pts = define_center(cnts[i])
+        if(center[1] < limitY):
+            line_cnts.append(cnts[i])
         else:
-            limitY = command.center[1] + 15
-            line_command = sort_contours(line_command)
-            command_order.append(line_command)
-            line_command = []
-            line_command.append(command)
-    line_command = sort_contours(line_command)
-    command_order.append(line_command)
-    return command_order
+            limitY = center[1] + 15
+            line_cnts = sort_contours(line_cnts)
+            cnts_order.append(line_cnts)
+            line_cnts = []
+            line_cnts.append(cnts[i])
+    line_cnts = sort_contours(line_cnts)
+    cnts_order.append(line_cnts)        
+
+    commands = []
+    for y in range(len(cnts_order)): 
+        line_commands  = []
+        for x in range(len(cnts_order[y])):  
+            qCommand = Query_command()
+            qCommand = preprocess_command(cnts_order[y][x],image)
+            best_command_match, diff = match_command(qCommand,train_commands)
+            if(best_command_match != "Unknown"):
+                qCommand.best_command_match, qCommand.diff = best_command_match, diff
+                line_commands.append(qCommand)
+        if len(line_commands) > 0:
+            commands.append(line_commands)
+    
+    return commands 
 
 def match_command(qCommand, train_command):
     best_command_match_diff = 1000000000
@@ -115,7 +118,6 @@ def match_command(qCommand, train_command):
     return best_command_match_name, best_command_match_diff
 
 def responseCommands(commands):
-    return ""
     response = ""
     if len(commands) == 0:
         return "Unknown"
@@ -133,20 +135,21 @@ def responseCommands(commands):
 def preprocess_command(contour, image):
     qCommand = Query_command()
     qCommand.contour = contour
-    # Find perimeter of card and use it to approximate corner points
-    peri = cv2.arcLength(contour,True)
-    approx = cv2.approxPolyDP(contour,0.01*peri,True)
-    pts = np.float32(approx)
-    qCommand.corner_pts = pts
     # Find width and height of card's bounding rectangle
     qCommand.width, qCommand.height,qCommand.x, qCommand.y = cv2.boundingRect(contour)
     # Find center point of card by taking x and y average of the four corners.
+    qCommand.center, pts = define_center(contour)
+    qCommand.command_img = flattener(image, pts, qCommand.width, qCommand.height)
+    return qCommand
+
+def define_center(contour):
+    peri = cv2.arcLength(contour,True)
+    approx = cv2.approxPolyDP(contour,0.01*peri,True)
+    pts = np.float32(approx)
     average = np.sum(pts, axis=0)/len(pts)
     cent_x = int(average[0][0])
     cent_y = int(average[0][1])
-    qCommand.center = [cent_x, cent_y]
-    qCommand.command_img = flattener(image, pts, qCommand.width, qCommand.height)
-    return qCommand
+    return [cent_x, cent_y], pts
 
 def sort_contours(cnts, method="left-to-right"):
     i = 0

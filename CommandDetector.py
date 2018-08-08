@@ -38,11 +38,12 @@ for linha in textInput:
 	textOutput = textOutput + response +"\n"
 
 	temp_cnts = []
-	for i in range(len(commands)):
-		temp_cnts.append(commands[i].contour)
-		cv2.drawContours(image,temp_cnts, -1, (255,0,0), 2)
-		cv2.putText(image,commands[i].best_command_match,(commands[i].center[0]-60, commands[i].center[1]+25),cv2.FONT_HERSHEY_SIMPLEX,1,(0,0,0),3,cv2.LINE_AA)
-		cv2.imwrite(path+"/testeResultado"+ nameFile +".jpeg", image); 
+	for y in range(len(commands)):
+		for x in range(len(commands)):
+			temp_cnts.append(commands[y][x].contour)
+			cv2.drawContours(image,temp_cnts, -1, (255,0,0), 2)
+			cv2.putText(image,commands[y][x].best_command_match,(commands[y][x].center[0]-60, commands[y][x].center[1]+25),cv2.FONT_HERSHEY_SIMPLEX,1,(0,0,0),3,cv2.LINE_AA)
+			cv2.imwrite(path+"/testeResultado"+ nameFile +".jpeg", image); 
     
 
 arqOutput = open(pathTeste+"testOutput.txt", 'w')

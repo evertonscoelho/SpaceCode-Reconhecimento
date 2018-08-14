@@ -12,7 +12,7 @@ CARD_THRESH = 30
 COMMAND_WIDTH = 168
 COMMAND_HEIGHT = 148
 
-RANK_DIFF_MAX = 4000
+RANK_DIFF_MAX = 17000
 
 COMMAND_MAX_AREA = 120000
 COMMAND_MIN_AREA = 40
@@ -110,10 +110,12 @@ def match_command(qCommand, train_command):
     retval, qCommand.command_img = cv2.threshold(qCommand.command_img, 100, 255, cv2. THRESH_BINARY)
     if (len(qCommand.command_img) != 0):
         for Tcommand in train_command:
-            diff_img = cv2.absdiff(Tcommand.img, qCommand.command_img)
-            command_diff = int(np.sum(diff_img)/255)
-            if command_diff < best_command_match_diff:
-                best_command_match_diff = command_diff
+            #diff_img = cv2.absdiff(Tcommand.img, qCommand.command_img)
+            #command_diff = int(np.sum(diff_img)/255)
+            err = np.sum((Tcommand.img.astype("float") - qCommand.command_img.astype("float")) ** 2)
+            err /= float(Tcommand.img.shape[0] * qCommand.command_img.shape[1]) 
+            if err < best_command_match_diff:
+                best_command_match_diff = err
                 best_command_name = Tcommand.name
     if (best_command_match_diff < RANK_DIFF_MAX):
         best_command_match_name = best_command_name

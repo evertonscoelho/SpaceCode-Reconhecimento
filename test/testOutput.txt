@@ -1,18 +1,18 @@
-0;imagem duas linhas 30 graus.jpg;F1,Right,Right,F1,NEXT,Up,Up
-0;imagem duas linhas 45 graus.jpg;F1,Right,Right,F1,NEXT,Up
-0;imagem duas linhas 90 graus 2.jpg;F1,Right,Right,NEXT,F2
-0;imagem duas linhas 90 graus.jpg;F1,Right,Right,NEXT,F1
-0;imagem duas linhas maior que 90.jpg;F1,Right,Right,NEXT,F1
-0;imagem duas linhas maior que 120.jpg;F1,Right,NEXT,F1,Up
-0;imagem duas linhas menor 70 grau.jpg;F1,Right,F1,NEXT,F2,Up
-1;Imagem linha simples 90 graus.jpg;F1,Right,Right
-1;imagem linha simples angulo 45.jpg;F1,Right,Right
-1;imagem linha simples maior que 90.jpg;F1,Right,Right
-0;imagem linha simples maior que 120.jpg;F1,Right
-1;imagem linha simples menor que 30.jpg;F1,Right,Right
-0;imagem tres linhas 45 graus.jpg;F1,Right,Right,F1,NEXT,F2,Up,Up,F3,NEXT,F3,Left
-0;imagem tres linhas 70 graus.jpg;F1,Right,Right,F1,NEXT,F2,Up,Up,F3,NEXT,F3,Left
-0;imagem tres linhas 90 graus 2.jpg;F1,Right,NEXT,F2,Up,F3,NEXT,F3
-0;imagem tres linhas 90 graus.jpg;F1,Right,Right,F1,NEXT,F2,Up,F3,NEXT,F3,Left
-0;imagem tres linhas 120 graus.jpg;F1,Right,NEXT,F1,Up,F2,NEXT,F3
-0;imagem tres linhas maior que 90 desfocada.jpg;F1,Right,Right,NEXT,F1,Up,F3,NEXT,F3
+0;imagem duas linhas 30 graus.jpg;F1,F1,Right,Right,Right,Right,F1,F1,NEXT,F2,Up,Up,Up,Up
+0;imagem duas linhas 45 graus.jpg;F1,F1,Right,Right,Right,Right,F1,F1,NEXT,F2,Up,Up,Up
+0;imagem duas linhas 90 graus 2.jpg;F1,F1,Right,Right,Right,Right,F2,NEXT,F2,F1,Up,Up
+0;imagem duas linhas 90 graus.jpg;F1,F1,Right,Right,Right,Right,F1,NEXT,F1,F1,Up,Up
+0;imagem duas linhas maior que 90.jpg;F1,F1,Right,Right,Right,Right,F1,NEXT,F1,F1,Up,Up
+0;imagem duas linhas maior que 120.jpg;F1,F1,Right,Right,Right,F1,NEXT,F1,F1,Up,Up,Up
+0;imagem duas linhas menor 70 grau.jpg;F1,F1,Right,Right,Right,F1,F1,NEXT,F2,F2,Up,Up,Up
+0;Imagem linha simples 90 graus.jpg;F1,F1,Right,Right,Right,Right
+0;imagem linha simples angulo 45.jpg;F1,F1,Right,Right,Right,Right
+0;imagem linha simples maior que 90.jpg;F1,F1,Right,Right,Right,Right
+0;imagem linha simples maior que 120.jpg;F1,F1,Right,Right,Right
+0;imagem linha simples menor que 30.jpg;F1,F1,Right,Right,Right,Right
+0;imagem tres linhas 45 graus.jpg;F1,F1,Right,Right,Right,Right,F1,F1,NEXT,F2,F1,Up,Up,Up,Up,F3,F3,NEXT,F3,F3,Left,Left,Down
+0;imagem tres linhas 70 graus.jpg;F1,F1,Right,Right,Right,Right,F1,F1,NEXT,F2,F2,Up,Up,Up,Up,F3,F3,NEXT,F3,F3,Left,Left,Down
+0;imagem tres linhas 90 graus 2.jpg;F1,F1,Right,Right,Right,F2,NEXT,F2,F1,Up,Up,Up,F3,F3,NEXT,F3,F3,Left,Down
+0;imagem tres linhas 90 graus.jpg;F1,F1,Right,Right,Right,Right,F1,F1,NEXT,F2,F1,Up,Up,Up,F3,F3,NEXT,F3,F3,Left,Left,Down
+0;imagem tres linhas 120 graus.jpg;F1,F1,Right,Right,Right,F1,NEXT,F1,F1,Up,Up,Up,F2,F2,NEXT,F3,F3,Left,Down
+0;imagem tres linhas maior que 90 desfocada.jpg;F1,F1,Right,Right,Right,Right,F1,NEXT,F1,F1,Up,Up,Up,F3,F3,NEXT,F3,F3,Left,Down

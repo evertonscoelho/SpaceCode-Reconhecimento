@@ -14,5 +14,5 @@ imagem tres linhas 45 graus.jpg;F1,right,right,F2,NEXT,F2,up,up,F3,NEXT,F3,left,
 imagem tres linhas 70 graus.jpg;F1,right,right,F2,NEXT,F2,up,up,F3,NEXT,F3,left,down
 imagem tres linhas 90 graus 2.jpg;F1,right,right,F2,NEXT,F2,up,up,F3,NEXT,F3,left,down
 imagem tres linhas 90 graus.jpg;F1,right,right,F2,NEXT,F2,up,up,F3,NEXT,F3,left,down
-imagem tres linhas 120 graus.jpg;F1,right,right,F2,NEXT,F2,up,up,F3,NEXT,F3,left,down
+imagem tres linhas 120 graus.jpg; F1,right,right,F2,NEXT,F2,up,up,F3,NEXT,F3,left,down
 imagem tres linhas maior que 90 desfocada.jpg;F1,right,right,F2,NEXT,F2,up,up,F3,NEXT,F3,left,down

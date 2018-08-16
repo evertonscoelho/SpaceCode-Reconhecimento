@@ -22,16 +22,10 @@ for linha in textInput:
 	r = 1100.0 / image.shape[1]
 	dim = (1100, int(image.shape[0] * r))
 	image = cv2.resize(image,dim, interpolation = cv2.INTER_AREA)
-
 	pre_proc = Command.preprocess_image(image)
 	cnts = Command.find_cnts_commands(pre_proc)
 	commands = Command.find_commands(cnts, image, train_commands)
-	if len(commands) > 0:
-		response = Command.responseCommands(commands)
-	else:
-		train_commands = Command.load_commands( path + '/Commands_Imgs_Black_Backgroud/')
-		commands = Command.find_commands(cnts, image, train_commands)
-		response = Command.responseCommands(commands)
+	response = Command.responseCommands(commands)
 
 	if response.lower() == resultExpected.lower():
 		textOutput = textOutput + "1;"

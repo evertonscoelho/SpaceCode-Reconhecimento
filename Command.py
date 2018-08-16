@@ -41,7 +41,7 @@ class Train_command:
 def load_commands(filepath):
     train_commands = []
     i = 0
-    for Command in ['Down','F1','F2','F3','Left','Right','Up']:
+    for Command in ['Down','F1','F2','F3','Left','Right','Up', 'A', 'B', 'C']:
         train_commands.append(Train_command())
         train_commands[i].name = Command
         filename = Command + '.jpg'
@@ -57,7 +57,7 @@ def preprocess_image(image):
 
 def find_cnts_commands(thresh_image):
     dummy,cnts,hier = cv2.findContours(thresh_image,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
-    cnts_return = []    
+    cnts_return = [] 
     for i in range(len(cnts)):
         size = cv2.contourArea(cnts[i])
         peri = cv2.arcLength(cnts[i],True)

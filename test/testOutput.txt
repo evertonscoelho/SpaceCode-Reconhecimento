@@ -1,18 +1,62 @@
-0;imagem duas linhas 30 graus.jpg;F1,F1,Right,Right,Right,Right,F1,F1,NEXT,F2,Up,Up,Up,Up
-0;imagem duas linhas 45 graus.jpg;F1,F1,Right,Right,Right,Right,F1,F1,NEXT,F2,Up,Up,Up
-0;imagem duas linhas 90 graus 2.jpg;F1,F1,Right,Right,Right,Right,F2,NEXT,F2,F1,Up,Up
-0;imagem duas linhas 90 graus.jpg;F1,F1,Right,Right,Right,Right,F1,NEXT,F1,F1,Up,Up
-0;imagem duas linhas maior que 90.jpg;F1,F1,Right,Right,Right,Right,F1,NEXT,F1,F1,Up,Up
-0;imagem duas linhas maior que 120.jpg;F1,F1,Right,Right,Right,F1,NEXT,F1,F1,Up,Up,Up
-0;imagem duas linhas menor 70 grau.jpg;F1,F1,Right,Right,Right,F1,F1,NEXT,F2,F2,Up,Up,Up
-0;Imagem linha simples 90 graus.jpg;F1,F1,Right,Right,Right,Right
-0;imagem linha simples angulo 45.jpg;F1,F1,Right,Right,Right,Right
-0;imagem linha simples maior que 90.jpg;F1,F1,Right,Right,Right,Right
-0;imagem linha simples maior que 120.jpg;F1,F1,Right,Right,Right
-0;imagem linha simples menor que 30.jpg;F1,F1,Right,Right,Right,Right
-0;imagem tres linhas 45 graus.jpg;F1,F1,Right,Right,Right,Right,F1,F1,NEXT,F2,F1,Up,Up,Up,Up,F3,F3,NEXT,F3,F3,Left,Left,Down
-0;imagem tres linhas 70 graus.jpg;F1,F1,Right,Right,Right,Right,F1,F1,NEXT,F2,F2,Up,Up,Up,Up,F3,F3,NEXT,F3,F3,Left,Left,Down
-0;imagem tres linhas 90 graus 2.jpg;F1,F1,Right,Right,Right,F2,NEXT,F2,F1,Up,Up,Up,F3,F3,NEXT,F3,F3,Left,Down
-0;imagem tres linhas 90 graus.jpg;F1,F1,Right,Right,Right,Right,F1,F1,NEXT,F2,F1,Up,Up,Up,F3,F3,NEXT,F3,F3,Left,Left,Down
-0;imagem tres linhas 120 graus.jpg;F1,F1,Right,Right,Right,F1,NEXT,F1,F1,Up,Up,Up,F2,F2,NEXT,F3,F3,Left,Down
-0;imagem tres linhas maior que 90 desfocada.jpg;F1,F1,Right,Right,Right,Right,F1,NEXT,F1,F1,Up,Up,Up,F3,F3,NEXT,F3,F3,Left,Down
+0;fundo azul 30 graus.jpg;Unknown
+0;fundo azul 90 graus.jpg;Up,Up,Up,Right
+0;fundo azul 90 graus duas linhas.jpg;F1,Up,Up,Up,NEXT,F2,Right,Right,F2
+0;fundo azul 90 graus duas linhas longe.jpg;F1,Up,Up,Up,NEXT,F1,Right,Right,F1
+0;fundo azul 90 graus duas linhas perto.jpg;F1,Up,Up,Up,NEXT,F1,Right,Right,F1
+0;IMG_20180811_142314758.jpg;F1,Right,Down,Down,Right,Right,Up
+0;IMG_20180811_142335049.jpg;F1,Right,Down,Down,Right,Right,Up
+0;fundo azul 90 graus tres linhas.jpg;F1,Up,Up,Up,NEXT,F2,Right,Right,F2,NEXT,F3,Right,Right,Right
+0;IMG_20180811_142359488.jpg;Right,Down,F1,C,C,F1
+0;IMG_20180811_142401525.jpg;C,NEXT,Down,F1,C,C,F1
+0;IMG_20180811_142521900.jpg;F1,Right,Down,Down,Right,Right,Up,NEXT,F1,Right,Up,Up,F1
+0;IMG_20180811_142533285.jpg;A,C,Down,F1,C,C,NEXT,C,F1
+0;IMG_20180811_142538936.jpg;F1,Right,Down,Down,Right,Right,Up,NEXT,F1,Right,Up,Up,F1
+0;IMG_20180811_142625542.jpg;F1,Right,Down,Down,Right,Right,Up,NEXT,F1,Right,Up,Up,F1,NEXT,F3,Right,Right,Up
+0;IMG_20180811_142627974.jpg;F1,Right,Down,Down,Right,Right,Up,NEXT,F1,Right,Up,Up,F1,NEXT,F3,Right,Right,Up
+0;IMG_20180811_142638873.jpg;F1,F1,C,Right,Down,Right,C,F1,NEXT,F3,Right,F1,NEXT,Right,F3
+0;IMG_20180811_142644009.jpg;F1,F1,Right,Down,F1,C,C,F1,NEXT,C,F3,F1,NEXT,Right,Right,F1
+0;IMG_20180811_142848259.jpg;F1,Right,Up,NEXT,Up,F1,Up,NEXT,Right,Right,Down
+0;IMG_20180811_142850844.jpg;F1,Right,Up,NEXT,Up,F1,Up,NEXT,Right,Right,Down
+0;IMG_20180811_142858604.jpg;F1,Right,Up,NEXT,Up,F1,Up,NEXT,Right,C,Right,Down
+0;IMG_20180811_142900807.jpg;F1,Right,Up,NEXT,Up,F1,Up,NEXT,Right,Right,Down
+0;IMG_20180811_142919022.jpg;F1,Right,Up
+0;IMG_20180811_142919855.jpg;F1,Right,Up,NEXT,C
+0;IMG_20180811_142950971.jpg;F1,Right,Up,NEXT,Right,F1,Up
+0;IMG_20180811_142954052.jpg;F1,Right,Up,NEXT,Right,F1,Up
+0;IMG_20180811_142959163.jpg;F1,Right,Up,NEXT,Right,F1,Up
+0;IMG_20180811_143013651.jpg;F2,F2,Right,F1,NEXT,F1,C,Up
+0;IMG_20180811_143014900.jpg;C,F2,Right,F1,NEXT,F1,Up
+0;IMG_20180811_143018526.jpg;F2,Right,Up,NEXT,F1,Up
+0;IMG_20180811_143019980.jpg;F2,Right,Up,NEXT,Right,F1,Up
+0;IMG_20180811_143258596.jpg;Down,Right,F1,Right
+0;IMG_20180811_143301982.jpg;Down,Right,F1,Right
+0;IMG_20180811_143312337.jpg;Down,Right,F1,Right
+0;IMG_20180811_143317005.jpg;Down,Right,F1,Right
+0;IMG_20180811_143323878.jpg;Down,Right,F1,Right
+0;IMG_20180811_143331817.jpg;Down,Right,F1,Right
+0;IMG_20180811_143334435.jpg;Down,Right,F1,Right
+0;IMG_20180811_143338915.jpg;Down,Right,F1,Right
+0;IMG_20180811_143403028.jpg;Down,Right,F1,Right,NEXT,F3,Up,Right,F1
+0;IMG_20180811_143406150.jpg;Down,Right,F1,Right,NEXT,F3,Up,Right,F2
+0;IMG_20180811_143414016.jpg;Down,Right,F1,Right,NEXT,F3,Up,Right,F2
+0;IMG_20180811_143442170.jpg;Down,Right,F1,Right,NEXT,F3,Up,Right,F1,NEXT,Up,Up,F1,Up
+0;IMG_20180811_143445644.jpg;Down,Right,F1,Right,NEXT,F3,Up,Right,F1,NEXT,Up,Up,F1,Up
+0;IMG_20180811_143447518.jpg;Down,Right,F1,Right,NEXT,F3,Up,Right,F2,NEXT,Up,Up,F1,Up
+0;IMG_20180811_143451488.jpg;Down,Right,F1,Right,NEXT,F3,Up,Right,F1,NEXT,Up,Up,F1,Up
+0;IMG_20180811_143456427.jpg;Down,Right,F1,Right,NEXT,F2,Up,Right,F1,NEXT,Up,Up,F1,Up
+0;IMG_20180811_144148733.jpg;F1,Right,Up,F1
+0;IMG_20180811_144152354.jpg;F1,Right,Up,F1
+0;IMG_20180811_144157235.jpg;F1,Right,Up,F1
+0;IMG_20180811_144208205.jpg;F1,Right,Up,F1
+0;IMG_20180811_144251187.jpg;F1,Right,Up,F1,NEXT,F1,Right,Up
+0;IMG_20180811_144253718.jpg;F1,Right,Up,F1,NEXT,F1,Right,Up
+0;IMG_20180811_144258412.jpg;F1,Right,Up,F1,NEXT,F3,Right,Up
+0;IMG_20180811_144259587.jpg;F1,Right,Up,F1,NEXT,F1,Right,Up
+0;IMG_20180811_144306953.jpg;F1,Right,Up,NEXT,F2,Right,F1
+0;IMG_20180811_144332743.jpg;F1,Right,Up,F1,NEXT,Right,Up,Left,Up,NEXT,Left,F3
+0;IMG_20180811_144347369.jpg;F1,F1,Right,Up,F1,NEXT,Right,Up,Left,F1,NEXT,Left,F3
+0;IMG_20180811_144351254.jpg;F1,Right,Up,F1,NEXT,F1,Right,Up,Left,Up,NEXT,F3,Left,F1
+0;IMG_20180811_144352815.jpg;F1,Right,Up,F1,NEXT,F1,Right,Up,Left,Up,NEXT,F3,Left,F3
+0;IMG_20180811_144505850.jpg;Up,Left,Up,Right,C
+0;IMG_20180811_144526290.jpg;Right,NEXT,Up,Left,Up,NEXT,F1,F1,F1,C
+0;IMG_20180811_144541604.jpg;C,NEXT,Up,Left,Up,Right,C,C,NEXT,F2,F1,F1

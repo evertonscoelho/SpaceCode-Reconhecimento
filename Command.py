@@ -57,18 +57,42 @@ def preprocess_image(image):
 
 def find_cnts_commands(thresh_image):
     dummy,cnts,hier = cv2.findContours(thresh_image,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
-    cnts_return = [] 
+    cnts_return = {} 
+    hier_return = {} 
     for i in range(len(cnts)):
         size = cv2.contourArea(cnts[i])
         peri = cv2.arcLength(cnts[i],True)
         approx = cv2.approxPolyDP(cnts[i],0.01*peri,True)
         if len(approx) == 4 and (size < COMMAND_MAX_AREA) and (size > COMMAND_MIN_AREA):
-              cnts_return.append(cnts[i])  
-    return cnts_return
+                hier_return[i] = hier[0][i][3]
+                cnts_return[i] = cnts[i]
+
+    listRemove = []
+    print(len(cnts_return))
+    for i in range(len(cnts_return)):
+        if test(hier_return, i):
+            listRemove.append(i)
+
+    for i in listRemove:
+        del cnts_return[i]
+
+    return cnts_return.values()
+
+def test(hier, i):
+    child = hier.get(i)
+    if child in hier:
+        return True
+    elif child != -1:
+        #test(hier, child)
+        return False
+    else:
+        return False
+
 
 def find_commands(cnts, image, train_commands):
     if len(cnts) == 0:
         return []
+
     cnts = sort_contours(cnts, method="top-to-bottom")
 
     cnts_order = []

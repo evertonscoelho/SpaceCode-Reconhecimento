@@ -1,0 +1,4 @@
+1.jpg;B,up,down,right,left
+2.jpg;B,up,down,right,left
+3.jpg;B,up,down,right,left
+4.jpg;B,up,down,right,left

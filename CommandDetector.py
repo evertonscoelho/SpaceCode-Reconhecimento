@@ -3,9 +3,11 @@ import numpy as np
 import time
 import os
 import Command
+import time
+
 
 path = os.path.dirname(os.path.abspath(__file__))
-pathTeste = path+"/test/"
+pathTeste = path+"/test/Pecas Tortas/"
 train_commands = Command.load_commands( path + '/Commands_Imgs/')
 
 arqInput = open(pathTeste+"testInput.txt", 'r')
@@ -13,6 +15,7 @@ textInput = arqInput.readlines()
 textOutput =""
 
 for linha in textInput:
+	start_time = time.time()
 	split = linha.split(";")
 	nameFile = split[0]
 	resultExpected = split[1]
@@ -24,7 +27,7 @@ for linha in textInput:
 	image = cv2.resize(image,dim, interpolation = cv2.INTER_AREA)
 	pre_proc = Command.preprocess_image(image)
 	#cv2.imwrite(path+"/testeResultadoP"+ nameFile +".jpeg", pre_proc);     
-	cnts = Command.find_cnts_commands(pre_proc)
+	cnts, qntd_found, qtnd_squard = Command.find_cnts_commands(pre_proc)
 	commands = Command.find_commands(cnts, image, train_commands)
 	response = Command.responseCommands(commands)
 
@@ -32,6 +35,10 @@ for linha in textInput:
 		textOutput = textOutput + "1;"
 	else:
 		textOutput = textOutput +"0;"
+	textOutput = textOutput + str(qntd_found) +"---"
+	textOutput = textOutput + str(qtnd_squard) +"---"
+	timeFormat = "%.2f" % (time.time() - start_time)
+	textOutput = textOutput + str(timeFormat)  +"---"
 	textOutput = textOutput + nameFile +";"
 	textOutput = textOutput + response +"\n"
 	
@@ -46,4 +53,3 @@ for linha in textInput:
 arqOutput = open(pathTeste+"testOutput.txt", 'w')
 arqOutput.write(textOutput)
 arqOutput.close()
-

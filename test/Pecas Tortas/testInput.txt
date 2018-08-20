@@ -1,0 +1,4 @@
+1.jpg;A,down,Up,left,NEXT,B,right,up,up,up,NEXT,C,left,right,A
+2.jpg;A,down,Up,left,NEXT,B,right,up,up,up,NEXT,C,left,right,A
+3.jpg;A,down,Up,left,NEXT,B,right,up,up,up,NEXT,C,left,right,A
+4.jpg;A,down,Up,left,NEXT,B,right,up,up,up,NEXT,C,left,right,A

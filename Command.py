@@ -12,12 +12,12 @@ CARD_THRESH = 30
 COMMAND_WIDTH = 168
 COMMAND_HEIGHT = 148
 
-RANK_DIFF_MAX = 17000
+RANK_DIFF_MAX = 20000
 
 COMMAND_MAX_AREA = 120000
 COMMAND_MIN_AREA = 40
 
-LIMIT_Y_LINE = 100
+LIMIT_Y_LINE = 80
 
 
 
@@ -53,7 +53,7 @@ def load_commands(filepath):
 def preprocess_image(image):
     gray = cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
     blur = cv2.GaussianBlur(gray,(5,5),0)
-    retval, thresh = cv2.threshold(blur, 100, 255, cv2.THRESH_BINARY)
+    retval, thresh = cv2.threshold(blur, 80, 255, cv2.THRESH_BINARY)
     return thresh
 
 def find_cnts_commands(thresh_image):
@@ -65,7 +65,7 @@ def find_cnts_commands(thresh_image):
         approx = cv2.approxPolyDP(cnts[i],0.01*peri,True)
         if len(approx) == 4 and (size < COMMAND_MAX_AREA) and (size > COMMAND_MIN_AREA):
                 cnts_return.append(cnts[i])
-    return cnts_return
+    return cnts_return, len(cnts), len(cnts_return)
 
 def find_commands(cnts, image, train_commands):
     if len(cnts) == 0:

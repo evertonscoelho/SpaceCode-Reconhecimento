@@ -1,0 +1,8 @@
+1.jpg;A,down,up,right,NEXT,B,right,up,up,up,NEXT,C,left,right,A
+2.jpg;A,down,up,right,NEXT,B,right,up,up,up,NEXT,C,left,right,A
+3.jpg;A,down,up,right,NEXT,B,right,up,up,up,NEXT,C,left,right,A
+4.jpg;A,down,up,right,NEXT,B,right,up,up,up,NEXT,C,left,right,A
+5.jpg;A,down,up,right,NEXT,B,right,up,up,up,NEXT,C,left,right,A
+6.jpg;A,down,up,right,NEXT,B,right,up,up,up,NEXT,C,left,right,A
+7.jpg;A,down,up,right,NEXT,B,right,up,up,up,NEXT,C,left,right,A
+8.jpg;A,down,up,right,NEXT,B,right,up,up,up,NEXT,C,left,right,A

@@ -1,0 +1,8 @@
+0;198---22---0.14---1.jpg;Down,Up,Right,Right,NEXT,B,Right,Up,Up,Up,NEXT,Left,Right,C
+0;828---22---0.12---2.jpg;A,Down,Up,Left,NEXT,B,Right,Up,Up,NEXT,Left,Right,A
+0;624---22---0.15---3.jpg;A,Down,Up,Left,NEXT,B,Right,Up,Up,NEXT,C,Left,Right,A
+0;197---22---0.13---4.jpg;Down,Up,Left,NEXT,B,Right,Up,Up,Up,NEXT,C,Left
+0;191---23---0.13---5.jpg;A,Down,Up,Left,NEXT,B,Right,Up,Up,Up,NEXT,Left,Left
+0;117---25---0.13---6.jpg;A,Up,Up,Left,NEXT,B,Right,Up,Up,Up,NEXT,C,Left,Right,A
+0;243---23---0.13---7.jpg;Down,Up,Left,Left,NEXT,B,Right,Up,Up,Up,NEXT,C,Left,Right,A
+0;103---18---0.12---8.jpg;Up,Left,NEXT,Up,Up,Up,NEXT,Left,Right,A

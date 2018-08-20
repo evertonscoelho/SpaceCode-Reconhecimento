@@ -1,0 +1,4 @@
+0;20---5---0.10---1.jpg;Down,Left,Left
+0;21---6---0.10---2.jpg;B,Down,Left
+0;24---4---0.10---3.jpg;Down,C
+0;21---7---0.10---4.jpg;B,Down,Left

@@ -1,3 +1,0 @@
-4.jpeg;A,B,C,NEXT,B,A,B,NEXT,C,A,C
-5.jpeg;A,B,C,NEXT,B,A,B,NEXT,C,A,C
-6.jpeg;A,B,C,NEXT,B,A,B,NEXT,C,A,C

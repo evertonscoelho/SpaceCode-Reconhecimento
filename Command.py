@@ -27,6 +27,7 @@ class Query_command:
     def __init__(self):
         self.contour = [] 
         self.width, self.height, self.x, self.y = 0, 0, 0, 0
+        self.rect = []
         self.center = [] 
         self.warp = []
         self.command_img = [] 
@@ -57,37 +58,14 @@ def preprocess_image(image):
 
 def find_cnts_commands(thresh_image):
     dummy,cnts,hier = cv2.findContours(thresh_image,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
-    cnts_return = {} 
-    hier_return = {} 
+    cnts_return = [] 
     for i in range(len(cnts)):
         size = cv2.contourArea(cnts[i])
         peri = cv2.arcLength(cnts[i],True)
         approx = cv2.approxPolyDP(cnts[i],0.01*peri,True)
         if len(approx) == 4 and (size < COMMAND_MAX_AREA) and (size > COMMAND_MIN_AREA):
-                hier_return[i] = hier[0][i][3]
-                cnts_return[i] = cnts[i]
-
-    listRemove = []
-    print(len(cnts_return))
-    for i in range(len(cnts_return)):
-        if test(hier_return, i):
-            listRemove.append(i)
-
-    for i in listRemove:
-        del cnts_return[i]
-
-    return cnts_return.values()
-
-def test(hier, i):
-    child = hier.get(i)
-    if child in hier:
-        return True
-    elif child != -1:
-        #test(hier, child)
-        return False
-    else:
-        return False
-
+                cnts_return.append(cnts[i])
+    return cnts_return
 
 def find_commands(cnts, image, train_commands):
     if len(cnts) == 0:
@@ -122,10 +100,25 @@ def find_commands(cnts, image, train_commands):
             if(best_command_match != "Unknown"):
                 qCommand.best_command_match, qCommand.diff = best_command_match, diff
                 line_commands.append(qCommand)
+        check_line(line_commands, image)
         if len(line_commands) > 0:
             commands.append(line_commands)
     
     return commands 
+
+def check_line(line_commands, img):
+    for x in range(len(line_commands)):  
+        for y in range(x+1, len(line_commands)):
+            if intersection(line_commands[x].x, line_commands[y].x, line_commands[x].y, line_commands[y].y, line_commands[x].height, line_commands[y].height, line_commands[x].width, line_commands[y].width):
+                line_commands.remove(line_commands[x])           
+                break
+
+def intersection(X1, X2, Y1, Y2, H1, H2, W1, W2):
+    if X1+W1<X2 or X2+W2<X1 or Y1+H1<Y2 or Y2+H2<Y1:
+        return False
+    else:
+        return True
+
 
 def match_command(qCommand, train_command):
     best_command_match_diff = 1000000000
@@ -134,8 +127,6 @@ def match_command(qCommand, train_command):
     retval, qCommand.command_img = cv2.threshold(qCommand.command_img, 100, 255, cv2. THRESH_BINARY)
     if (len(qCommand.command_img) != 0):
         for Tcommand in train_command:
-            #diff_img = cv2.absdiff(Tcommand.img, qCommand.command_img)
-            #command_diff = int(np.sum(diff_img)/255)
             err = np.sum((Tcommand.img.astype("float") - qCommand.command_img.astype("float")) ** 2)
             err /= float(Tcommand.img.shape[0] * qCommand.command_img.shape[1]) 
             if err < best_command_match_diff:
@@ -165,6 +156,7 @@ def preprocess_command(contour, image):
     qCommand.contour = contour
     # Find width and height of card's bounding rectangle
     qCommand.width, qCommand.height,qCommand.x, qCommand.y = cv2.boundingRect(contour)
+    qCommand.rect = (qCommand.width, qCommand.height,qCommand.x, qCommand.y)
     # Find center point of card by taking x and y average of the four corners.
     qCommand.center, pts = define_center(contour)
     qCommand.command_img = flattener(image, pts, qCommand.width, qCommand.height)

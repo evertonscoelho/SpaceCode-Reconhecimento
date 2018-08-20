@@ -23,7 +23,7 @@ for linha in textInput:
 	dim = (1100, int(image.shape[0] * r))
 	image = cv2.resize(image,dim, interpolation = cv2.INTER_AREA)
 	pre_proc = Command.preprocess_image(image)
-	cv2.imwrite(path+"/testeResultadoP"+ nameFile +".jpeg", pre_proc);     
+	#cv2.imwrite(path+"/testeResultadoP"+ nameFile +".jpeg", pre_proc);     
 	cnts = Command.find_cnts_commands(pre_proc)
 	commands = Command.find_commands(cnts, image, train_commands)
 	response = Command.responseCommands(commands)

@@ -1,0 +1,1 @@
+﻿1.jpg;A,down,Up,left,NEXT,B,right,up,up,up,NEXT,C,left,right,A

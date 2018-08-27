@@ -5,10 +5,10 @@
 5.jpg;B,right,right,up,NEXT,C,up,right,A
 6.jpg;B,right,right,up,NEXT,C,up,right,A
 7.jpg;B,right,right,up,NEXT,C,up,right,A
-8.jpg;B,left
-9.jpg;B,UP
-10.jpg;B,UP
-11.jpg;B,UP
+8.jpg;B,left,C,right
+9.jpg;B,left,C,right
+10.jpg;B,left,C,right
+11.jpg;B,left,C,right
 12.jpg;B,C,NEXT,A,right,up,up,C,NEXT,B,right,up,left,up
 13.jpg;B,C,NEXT,A,right,up,up,C,NEXT,B,right,up,left,up
 14.jpg;B,C,NEXT,A,right,up,up,C,NEXT,B,right,up,left,up
@@ -18,3 +18,5 @@
 18.jpg;A,up,right,up,A,NEXT,B,up,up,right,up,B
 19.jpg;A,up,right,up,A,NEXT,B,up,up,right,up,B
 20.jpg;A,up,right,up,A
+I7.jpg;Unknow
+I9.jpeg;Unknow

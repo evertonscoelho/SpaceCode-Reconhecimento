@@ -7,7 +7,7 @@ import time
 
 
 path = os.path.dirname(os.path.abspath(__file__))
-pathTeste = path+"/test/Pecas Tortas/"
+pathTeste = path+"/test/pecas_tortas/"
 train_commands = Command.load_commands( path + '/Commands_Imgs/')
 
 arqInput = open(pathTeste+"testInput.txt", 'r')
@@ -26,12 +26,12 @@ for linha in textInput:
 	dim = (1100, int(image.shape[0] * r))
 	image = cv2.resize(image,dim, interpolation = cv2.INTER_AREA)
 	pre_proc = Command.preprocess_image(image)
-	#cv2.imwrite(path+"/testeResultadoP"+ nameFile +".jpeg", pre_proc);     
+	cv2.imwrite(path+"/testeResultadoP"+ nameFile +".jpeg", pre_proc);     
 	cnts, qntd_found, qtnd_squard = Command.find_cnts_commands(pre_proc)
 	commands = Command.find_commands(cnts, image, train_commands)
 	response = Command.responseCommands(commands)
 
-	if response.lower() == resultExpected.lower():
+	if response.lower().strip() == resultExpected.lower().strip():
 		textOutput = textOutput + "1;"
 	else:
 		textOutput = textOutput +"0;"

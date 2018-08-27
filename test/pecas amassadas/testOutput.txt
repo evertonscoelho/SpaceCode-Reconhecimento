@@ -1,6 +1,4 @@
-0;48---20---0.11---1.jpg;Down,Down,NEXT,B,Right,Up,Up,C,NEXT,C,Down,Down,Left
-0;47---22---0.11---2.jpg;A,Down,NEXT,B,Right,Up,Up,C,NEXT,C,Down,Down,Left
-0;48---20---0.11---3.jpg;A,Down,NEXT,B,Right,Up,Up,NEXT,C,Down,Down,Left
-0;54---4---0.10---4.jpg;Down,Down
-0;45---12---0.10---5.jpg;C,A,C,NEXT,C,Down,Right,Left
-0;43---20---0.12---6.jpg;A,Right,Up,Up,C,NEXT,B,Right,Up,Left,Up
+0;4775---22---0.13---1.jpg;C,NEXT,A,Down,Down,NEXT,B,Right,Up,Up,C,NEXT,C,Down,Down,Left
+1;4571---21---0.13---2.jpg;A,Down,Down,NEXT,B,Right,Up,Up,C,NEXT,C,Down,Down,Left
+1;4952---23---0.13---3.jpg;A,Down,Down,NEXT,B,Right,Up,Up,C,NEXT,C,Down,Down,Left
+1;3708---20---0.13---6.jpg;A,Right,Up,Up,C,NEXT,B,Right,Up,Left,Up

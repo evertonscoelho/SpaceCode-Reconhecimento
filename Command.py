@@ -15,7 +15,7 @@ COMMAND_HEIGHT = 148
 RANK_DIFF_MAX = 20000
 
 COMMAND_MAX_AREA = 120000
-COMMAND_MIN_AREA = 40
+COMMAND_MIN_AREA = 30
 
 LIMIT_Y_LINE = 80
 
@@ -53,7 +53,7 @@ def load_commands(filepath):
 def preprocess_image(image):
     gray = cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
     blur = cv2.GaussianBlur(gray,(5,5),0)
-    retval, thresh = cv2.threshold(blur, 80, 255, cv2.THRESH_BINARY)
+    thresh = cv2.adaptiveThreshold(blur,255,cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY,11,2)
     return thresh
 
 def find_cnts_commands(thresh_image):
@@ -96,6 +96,7 @@ def find_commands(cnts, image, train_commands):
         for x in range(len(cnts_order[y])):  
             qCommand = Query_command()
             qCommand = preprocess_command(cnts_order[y][x],image)
+            #cv2.imwrite(str(x+y) +".jpeg", qCommand.command_img);     
             best_command_match, diff = match_command(qCommand,train_commands)
             if(best_command_match != "Unknown"):
                 qCommand.best_command_match, qCommand.diff = best_command_match, diff
@@ -107,17 +108,28 @@ def find_commands(cnts, image, train_commands):
     return commands 
 
 def check_line(line_commands, img):
+    teste = []
     for x in range(len(line_commands)):  
         for y in range(x+1, len(line_commands)):
-            if intersection(line_commands[x].x, line_commands[y].x, line_commands[x].y, line_commands[y].y, line_commands[x].height, line_commands[y].height, line_commands[x].width, line_commands[y].width):
+            if intersection(line_commands[x].contour, line_commands[y].contour):
                 line_commands.remove(line_commands[x])           
                 break
 
-def intersection(X1, X2, Y1, Y2, H1, H2, W1, W2):
-    if X1+W1<X2 or X2+W2<X1 or Y1+H1<Y2 or Y2+H2<Y1:
-        return False
-    else:
+def intersection(cnt1, cnt2):
+    leftmost_cnt1 = tuple(cnt1[cnt1[:,:,0].argmin()][0])
+    rightmost_cnt1 = tuple(cnt1[cnt1[:,:,0].argmax()][0])
+    topmost_cnt1 = tuple(cnt1[cnt1[:,:,1].argmin()][0])
+    bottommost_cnt1 = tuple(cnt1[cnt1[:,:,1].argmax()][0])
+
+    leftmost_cnt2 = tuple(cnt2[cnt2[:,:,0].argmin()][0])
+    rightmost_cnt2 = tuple(cnt2[cnt2[:,:,0].argmax()][0])
+    topmost_cnt2 = tuple(cnt2[cnt2[:,:,1].argmin()][0])
+    bottommost_cnt2 = tuple(cnt2[cnt2[:,:,1].argmax()][0])
+    
+    if leftmost_cnt1[0] < leftmost_cnt2[0] and rightmost_cnt1[0] > leftmost_cnt2[0]:
         return True
+    else:
+        return False
 
 
 def match_command(qCommand, train_command):

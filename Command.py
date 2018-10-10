@@ -19,9 +19,10 @@ COMMAND_MIN_AREA = 30
 
 LIMIT_Y_LINE = 80
 
-
-
 font = cv2.FONT_HERSHEY_SIMPLEX
+
+path = os.path.dirname(os.path.abspath(__file__))
+pathTeste = path+"/test/pecas_tortas/"
 
 class Query_command:
     def __init__(self):
@@ -50,6 +51,8 @@ def load_commands(filepath):
         i = i + 1
     return train_commands
 
+train_commands = load_commands( path + '/Commands_Imgs/')
+
 def preprocess_image(image):
     gray = cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
     blur = cv2.GaussianBlur(gray,(5,5),0)
@@ -67,7 +70,7 @@ def find_cnts_commands(thresh_image):
                 cnts_return.append(cnts[i])
     return cnts_return, len(cnts), len(cnts_return)
 
-def find_commands(cnts, image, train_commands):
+def find_commands(cnts, image):
     if len(cnts) == 0:
         return []
 

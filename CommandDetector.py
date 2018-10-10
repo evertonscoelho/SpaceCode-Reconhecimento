@@ -3,12 +3,6 @@ import numpy as np
 import time
 import os
 import Command
-import time
-
-
-path = os.path.dirname(os.path.abspath(__file__))
-pathTeste = path+"/test/pecas_tortas/"
-train_commands = Command.load_commands( path + '/Commands_Imgs/')
 
 arqInput = open(pathTeste+"testInput.txt", 'r')
 textInput = arqInput.readlines()
@@ -28,7 +22,7 @@ for linha in textInput:
 	pre_proc = Command.preprocess_image(image)
 	cv2.imwrite(path+"/testeResultadoP"+ nameFile +".jpeg", pre_proc);     
 	cnts, qntd_found, qtnd_squard = Command.find_cnts_commands(pre_proc)
-	commands = Command.find_commands(cnts, image, train_commands)
+	commands = Command.find_commands(cnts, image)
 	response = Command.responseCommands(commands)
 
 	if response.lower().strip() == resultExpected.lower().strip():

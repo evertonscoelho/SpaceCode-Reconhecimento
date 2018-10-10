@@ -7,7 +7,7 @@ import cv2
 
 app = Flask("Card-Detector")
 
-@app.route('/Card-Detector', methods=['POST'])
+@app.route('/')
 def post():
     content = request.get_json()
     return getCommandByImage(content['image'])
@@ -27,7 +27,4 @@ def getCommandByImage(content):
 	commands = Command.find_commands(cnts, image)
 	return Command.responseCommands(commands)
 
-if __name__ == '__main__':
-    app.run(debug=True)
-
-app.run(host='0.0.0.0', port=5000)
+app.run(host='0.0.0.0', port=80)

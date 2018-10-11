@@ -7,7 +7,7 @@ import cv2
 
 app = Flask("Card-Detector")
 
-@app.route('/')
+@app.route('/', methods=['POST'])
 def post():
     content = request.get_json()
     return getCommandByImage(content['image'])

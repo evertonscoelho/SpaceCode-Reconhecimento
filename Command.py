@@ -22,7 +22,6 @@ LIMIT_Y_LINE = 80
 font = cv2.FONT_HERSHEY_SIMPLEX
 
 path = os.path.dirname(os.path.abspath(__file__))
-pathTeste = path+"/test/pecas_tortas/"
 
 class Query_command:
     def __init__(self):
@@ -143,7 +142,7 @@ def match_command(qCommand, train_command):
     if (len(qCommand.command_img) != 0):
         for Tcommand in train_command:
             err = np.sum((Tcommand.img.astype("float") - qCommand.command_img.astype("float")) ** 2)
-            err /= float(Tcommand.img.shape[0] * qCommand.command_img.shape[1]) 
+            err /= float(qCommand.command_img.shape[0] * qCommand.command_img.shape[1]) 
             if err < best_command_match_diff:
                 best_command_match_diff = err
                 best_command_name = Tcommand.name

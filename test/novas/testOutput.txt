@@ -1,0 +1,8 @@
+1;880---45---0.12---1.jpeg;loop,6,5,4,2,9,NEXT,star,right,right,left,left,3,NEXT,triangle,move,triangle,circle,move,8,NEXT,circle,move,star,loop,7
+0;950---29---0.06---2.jpeg;loop,right,left,left,left,3,NEXT,right,triangle,circle,move,8,NEXT,triangle,7,NEXT,circle,move,star,loop
+1;669---44---0.08---3.jpeg;loop,6,5,4,2,9,NEXT,star,right,right,left,left,3,NEXT,triangle,move,triangle,circle,move,8,NEXT,circle,move,star,loop,7
+1;1161---42---0.08---4.jpeg;loop,6,5,4,2,9,NEXT,star,right,right,left,left,3,NEXT,triangle,move,triangle,circle,move,8,NEXT,circle,move,star,loop,7
+1;714---44---0.08---5.jpeg;loop,6,5,4,2,9,NEXT,star,right,right,left,left,3,NEXT,triangle,move,triangle,circle,move,8,NEXT,circle,move,star,loop,7
+1;3582---4---0.03---6.jpeg;triangle,7
+1;1277---3---0.02---7.jpeg;triangle,7
+1;1371---5---0.02---8.jpeg;triangle,7

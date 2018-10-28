@@ -15,7 +15,7 @@ COMMAND_HEIGHT = 148
 RANK_DIFF_MAX = 20000
 
 COMMAND_MAX_AREA = 120000
-COMMAND_MIN_AREA = 30
+COMMAND_MIN_AREA = 5000
 
 LIMIT_Y_LINE = 80
 
@@ -42,7 +42,7 @@ class Train_command:
 def load_commands(filepath):
     train_commands = []
     i = 0
-    for Command in ['Down','Left','Right','Up', 'A', 'B', 'C']:
+    for Command in ['2','3','4','5','6','7','8','9','circle','left','loop','move','right','star','triangle']:
         train_commands.append(Train_command())
         train_commands[i].name = Command
         filename = Command + '.jpg'
@@ -66,6 +66,7 @@ def find_cnts_commands(thresh_image):
         peri = cv2.arcLength(cnts[i],True)
         approx = cv2.approxPolyDP(cnts[i],0.01*peri,True)
         if len(approx) == 4 and (size < COMMAND_MAX_AREA) and (size > COMMAND_MIN_AREA):
+                print(size)
                 cnts_return.append(cnts[i])
     return cnts_return, len(cnts), len(cnts_return)
 
@@ -98,7 +99,6 @@ def find_commands(cnts, image):
         for x in range(len(cnts_order[y])):  
             qCommand = Query_command()
             qCommand = preprocess_command(cnts_order[y][x],image)
-            #cv2.imwrite(str(x+y) +".jpeg", qCommand.command_img);     
             best_command_match, diff = match_command(qCommand,train_commands)
             if(best_command_match != "Unknown"):
                 qCommand.best_command_match, qCommand.diff = best_command_match, diff
@@ -110,7 +110,6 @@ def find_commands(cnts, image):
     return commands 
 
 def check_line(line_commands, img):
-    teste = []
     for x in range(len(line_commands)):  
         for y in range(x+1, len(line_commands)):
             if intersection(line_commands[x].contour, line_commands[y].contour):
@@ -168,10 +167,8 @@ def responseCommands(commands):
 def preprocess_command(contour, image):
     qCommand = Query_command()
     qCommand.contour = contour
-    # Find width and height of card's bounding rectangle
     qCommand.width, qCommand.height,qCommand.x, qCommand.y = cv2.boundingRect(contour)
     qCommand.rect = (qCommand.width, qCommand.height,qCommand.x, qCommand.y)
-    # Find center point of card by taking x and y average of the four corners.
     qCommand.center, pts = define_center(contour)
     qCommand.command_img = flattener(image, pts, qCommand.width, qCommand.height)
     return qCommand

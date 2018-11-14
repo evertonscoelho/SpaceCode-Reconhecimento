@@ -1,0 +1,8 @@
+0;1638---19---0.13---1.jpg;triangle,right,right,right,NEXT,left,left,left,NEXT,right,2,move,move,move
+0;1409---19---0.13---2.jpg;triangle,right,right,right,NEXT,circle,left,left,left,NEXT,star,right,2,move,move,move
+1;5682---15---0.17---3.jpg;5,6,2,8,NEXT,4,6,3,7
+1;5430---15---0.15---4.jpg;5,6,2,8,NEXT,4,6,3,7
+1;5747---16---0.16---5.jpg;5,6,2,8,NEXT,4,6,3,7,NEXT,loop
+1;5657---16---0.14---6.jpg;5,6,2,8,NEXT,4,6,3,7,NEXT,loop
+1;5471---14---0.16---7.jpg;5,6,2,8,NEXT,4,6,3,7,NEXT,loop
+0;5369---20---0.18---8.jpg;5,6,2,8,NEXT,4,6,3,7,NEXT,7,move,move

@@ -1,0 +1,7 @@
+angulo,
+Distancia,
+Ideal,
+Linhas_Tortas,
+novas,
+Outros,
+pecas_tortas,

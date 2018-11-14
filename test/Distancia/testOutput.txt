@@ -1,0 +1,2 @@
+0;2448---22---0.15---1.jpg;4,8,2,3,7,NEXT,5,6,9,loop,loop,NEXT,loop
+0;2514---22---0.15---2.jpg;4,8,2,3,7,NEXT,5,6,9,loop,loop,NEXT,loop

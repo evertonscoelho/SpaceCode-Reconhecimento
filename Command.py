@@ -66,7 +66,7 @@ def find_cnts_commands(thresh_image):
         peri = cv2.arcLength(cnts[i],True)
         approx = cv2.approxPolyDP(cnts[i],0.01*peri,True)
         if len(approx) == 4 and (size < COMMAND_MAX_AREA) and (size > COMMAND_MIN_AREA):
-                print(size)
+                #print(size)
                 cnts_return.append(cnts[i])
     return cnts_return, len(cnts), len(cnts_return)
 
@@ -204,8 +204,8 @@ def flattener(image, pts, w, h):
     temp_rect[2] = br
     temp_rect[3] = bl
 
-    maxWidth = 168
-    maxHeight = 148
+    maxWidth = 185
+    maxHeight = 185
     dst = np.array([[0,0],[maxWidth-1,0],[maxWidth-1,maxHeight-1],[0, maxHeight-1]], np.float32)
  
     M = cv2.getPerspectiveTransform(temp_rect,dst)

@@ -1,4 +1,0 @@
-0;5320---22---0.16---1.jpg;5,6,2,8,NEXT,4,6,3,7,NEXT,loop,move,move
-0;5433---22---0.17---2.jpg;5,6,2,8,NEXT,4,6,3,7,NEXT,loop,move,move
-0;5040---21---0.15---3.jpg;5,6,2,8,NEXT,4,6,3,7,NEXT,loop,move,move
-0;5498---22---0.18---4.jpg;5,6,2,8,NEXT,4,6,3,7,NEXT,loop,move,move

@@ -1,0 +1,13 @@
+1.jpg;star,6,8,left,next,CIRCLE,MOVE,3,next,loop,2,right
+2.jpg;star,6,8,left,next,CIRCLE,MOVE,3,next,loop,2,right
+3.jpg;star,6,8,left,next,CIRCLE,MOVE,3,next,loop,2,right
+4.jpg;star,6,8,left,next,CIRCLE,MOVE,3,next,loop,2,right
+5.jpg;star,6,8,left,next,CIRCLE,MOVE,3,next,loop,2,right
+6.jpg;star,6,8,left,next,CIRCLE,MOVE,3,next,loop,2,right
+7.jpg;star,6,8,left,next,CIRCLE,MOVE,3,next,loop,2,right
+8.jpg;star,6,8,left,next,CIRCLE,MOVE,3,next,loop,2,right
+9.jpg;star,6,8,left,next,CIRCLE,MOVE,3,next,loop,2,right
+10.jpg;star,6,8,left,next,CIRCLE,MOVE,3,next,loop,2,right
+11.jpg;star,6,8,left,next,CIRCLE,MOVE,3,next,loop,2,right
+12.jpg;star,6,8,left,next,CIRCLE,MOVE,3,next,loop,2,right
+13.jpg;star,6,8,left,next,CIRCLE,MOVE,3,next,loop,2,right

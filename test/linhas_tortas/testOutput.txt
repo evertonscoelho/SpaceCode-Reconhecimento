@@ -1,0 +1,9 @@
+0;5320---22---0.15---1.jpg;5,6,2,8,NEXT,4,6,3,7,NEXT,loop,move,move
+0;5433---22---0.19---2.jpg;5,6,2,8,NEXT,4,6,3,7,NEXT,loop,move,move
+0;5040---21---0.17---3.jpg;5,6,2,8,NEXT,4,6,3,7,NEXT,loop,move,move
+0;5498---22---0.17---4.jpg;5,6,2,8,NEXT,4,6,3,7,NEXT,loop,move,move
+0;418---12---0.13---5.jpg;loop,8,6,NEXT,star,4,6,NEXT,left,NEXT,right
+0;398---12---0.14---6.jpg;loop,8,6,NEXT,star,4,6,NEXT,left,NEXT,right
+1;498---13---0.15---7.jpg;loop,8,6,NEXT,star,4,6,NEXT,left,right
+1;496---12---0.15---8.jpg;loop,8,6,NEXT,star,4,6,NEXT,left,right
+1;459---13---0.15---9.jpg;loop,8,6,NEXT,star,4,6,NEXT,left,right

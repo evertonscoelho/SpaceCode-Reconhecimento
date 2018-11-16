@@ -1,0 +1,4 @@
+1.jpg;star,3,7,next,CIRCLE,circle,star,2,next,6,left,8,5,next,left,triangle,left
+2.jpg;star,3,7,next,CIRCLE,circle,star,2,next,6,left,8,5,next,left,triangle,left
+3.jpg;star,3,7,next,CIRCLE,circle,star,2,next,6,left,8,5,next,left,triangle,left
+4.jpg;star,3,7,next,CIRCLE,circle,star,2,next,6,left,8,5,next,left,triangle,left

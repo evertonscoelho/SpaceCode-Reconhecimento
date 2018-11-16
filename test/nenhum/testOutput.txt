@@ -1,0 +1,14 @@
+0;807---9---0.15---1.jpg;left,left,NEXT,left,7,left
+0;1008---9---0.15---2.jpg;left,left,NEXT,left,7,left
+0;3353---1---0.03---3.jpg;7
+0;4332---1---0.04---4.jpg;Unknown
+0;2958---0---0.02---5.jpg;Unknown
+0;1971---1---0.02---6.jpg;Unknown
+0;2329---0---0.02---7.jpg;Unknown
+0;3187---0---0.03---8.jpg;Unknown
+0;4488---0---0.02---9.jpg;Unknown
+0;3294---0---0.02---10.jpg;Unknown
+0;2966---0---0.02---11.jpg;Unknown
+0;3437---1---0.03---12.jpg;Unknown
+0;4908---0---0.03---13.jpg;Unknown
+0;2293---0---0.02---14.jpg;Unknown

@@ -1,4 +1,4 @@
-0;916---19---0.16---1.jpg;star,4,NEXT,circle,star,2,NEXT,6,right,6,NEXT,left,triangle,left
+0;916---19---0.15---1.jpg;star,4,NEXT,circle,star,2,NEXT,6,right,6,NEXT,left,triangle,left
 0;733---22---0.16---2.jpg;star,4,2,NEXT,circle,star,2,NEXT,6,right,6,5,NEXT,left,triangle,left
-0;1038---18---0.17---3.jpg;star,4,NEXT,circle,star,2,NEXT,6,right,6,NEXT,left,triangle,left
-0;760---24---0.17---4.jpg;star,4,2,NEXT,circle,star,3,NEXT,6,right,6,5,NEXT,left,triangle,left
+0;1038---18---0.19---3.jpg;star,4,NEXT,circle,star,2,NEXT,6,right,6,NEXT,left,triangle,left
+0;760---24---0.16---4.jpg;star,4,2,NEXT,circle,star,3,NEXT,6,right,6,5,NEXT,left,triangle,left

@@ -1,6 +1,7 @@
 #!flask/bin/python
 from flask import Flask
 from flask import request
+from flask import send_file
 import numpy as np
 import Command
 import cv2
@@ -16,6 +17,10 @@ def readb64(base64_string):
 	nparr = np.fromstring(base64_string.decode('base64'), np.uint8)
 	img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
 	return img
+
+@app.route("/pecas/")
+def DownloadPecas ():
+        return send_file('/home/ec2-user/python-novos/pecas.zip', as_attachment=True)   
 
 def getCommandByImage(content):
 	image = readb64(content)

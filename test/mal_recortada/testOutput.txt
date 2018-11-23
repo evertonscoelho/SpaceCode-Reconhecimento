@@ -1,0 +1,7 @@
+0;978---4---0.12---1.jpg;left,NEXT,2
+0;833---4---0.12---2.jpg;left,NEXT,2
+0;1046---4---0.12---3.jpg;left,NEXT,2
+0;894---4---0.12---4.jpg;left,NEXT,2
+0;2330---18---0.16---5.jpg;circle,triangle,star,NEXT,circle,7,move,NEXT,circle,3,star
+0;2514---15---0.16---6.jpg;triangle,star,NEXT,circle,7,move,NEXT,circle,3,star
+0;2578---16---0.16---7.jpg;triangle,star,NEXT,circle,7,move,NEXT,circle,3,star

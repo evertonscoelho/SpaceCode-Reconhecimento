@@ -1,4 +1,0 @@
-0;4775---22---0.13---1.jpg;C,NEXT,A,Down,Down,NEXT,B,Right,Up,Up,C,NEXT,C,Down,Down,Left
-1;4571---21---0.13---2.jpg;A,Down,Down,NEXT,B,Right,Up,Up,C,NEXT,C,Down,Down,Left
-1;4952---23---0.13---3.jpg;A,Down,Down,NEXT,B,Right,Up,Up,C,NEXT,C,Down,Down,Left
-1;3708---20---0.13---6.jpg;A,Right,Up,Up,C,NEXT,B,Right,Up,Left,Up

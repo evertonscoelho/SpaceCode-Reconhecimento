@@ -1,1 +1,16 @@
-﻿1.jpg;A,down,Up,left,NEXT,B,right,up,up,up,NEXT,C,left,right,A
+2.jpg;TRIANGLE,RIGHT,RIGHT,RIGHT,NEXT,CIRCLE,LEFT,LEFT,LEFT,NEXT,STAR,RIGHT,MOVE,MOVE,MOVE,MOVE
+3.jpg;5,6,2,8,NEXT,4,6,3,7
+4.jpg;5,6,2,8,NEXT,4,6,3,7
+5.jpg;5,6,2,8,NEXT,4,6,3,7,NEXT,LOOP
+6.jpg;5,6,2,8,NEXT,4,6,3,7,NEXT,LOOP
+7.jpg;5,6,2,8,NEXT,4,6,3,7,NEXT,LOOP
+8.jpg;loop,8,6,NEXT,star,4,6,NEXT,left,right,NEXT,triangle,move,circle
+9.jpg;loop,8,6,NEXT,star,4,6,NEXT,left,right,NEXT,triangle,move,circle
+10.jpg;loop,8,6,NEXT,star,4,6,NEXT,left,right,NEXT,triangle,move,circle
+11.jpg;loop,8,6,NEXT,star,4,6,NEXT,left,right,NEXT,triangle,move,circle
+12.jpg;loop,8,6,NEXT,star,4,6,NEXT,left,right,NEXT,triangle,move,circle
+13.jpg;loop,8,6,NEXT,star,4,6,NEXT,left,right,NEXT,triangle,move,circle
+14.jpg;loop,8,6,NEXT,star,4,6,NEXT,left,right,NEXT,triangle,move,circle
+15.jpg;loop,8,6,NEXT,star,4,6,NEXT,left,right,NEXT,triangle,move,circle
+16.jpg;loop,8,6,NEXT,star,4,6,NEXT,left,right,NEXT,triangle,move,circle
+17.jpg;loop,8,6,NEXT,star,4,6,NEXT,left,right,NEXT,triangle,move,circle

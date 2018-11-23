@@ -15,7 +15,7 @@ COMMAND_HEIGHT = 148
 RANK_DIFF_MAX = 20000
 
 COMMAND_MAX_AREA = 120000
-COMMAND_MIN_AREA = 30
+COMMAND_MIN_AREA = 5000
 
 LIMIT_Y_LINE = 80
 
@@ -36,18 +36,57 @@ class Query_command:
 
 class Train_command:
     def __init__(self):
-        self.img = [] 
+        self.imgs = [] 
         self.name = "Placeholder"
 
 def load_commands(filepath):
     train_commands = []
     i = 0
-    for Command in ['Down','Left','Right','Up', 'A', 'B', 'C']:
+    for Command in ['2','3','4','5','6','7','8','9','circle','left','right']:
+        imgs = []
         train_commands.append(Train_command())
         train_commands[i].name = Command
         filename = Command + '.jpg'
-        train_commands[i].img = cv2.imread(filepath+filename, cv2.IMREAD_GRAYSCALE)
+        imgs.append(cv2.imread(filepath+filename, cv2.IMREAD_GRAYSCALE))
+        train_commands[i].img = imgs
         i = i + 1
+
+    for Command in ['loop','loop2']:
+        imgs = []
+        train_commands.append(Train_command())
+        train_commands[i].name = 'loop'
+        filename = Command + '.jpg'
+        imgs.append(cv2.imread(filepath+filename, cv2.IMREAD_GRAYSCALE))
+        train_commands[i].img = imgs
+        i = i + 1
+
+    for Command in ['move', 'move2','move3','move4']:
+        imgs = []
+        train_commands.append(Train_command())
+        train_commands[i].name = 'move'
+        filename = Command + '.jpg'
+        imgs.append(cv2.imread(filepath+filename, cv2.IMREAD_GRAYSCALE))
+        train_commands[i].img = imgs
+        i = i + 1
+
+    for Command in ['star', 'star2','star3','star4']:
+        imgs = []
+        train_commands.append(Train_command())
+        train_commands[i].name = 'star'
+        filename = Command + '.jpg'
+        imgs.append(cv2.imread(filepath+filename, cv2.IMREAD_GRAYSCALE))
+        train_commands[i].img = imgs
+        i = i + 1
+    
+    for Command in ['triangle', 'triangle2','triangle3','triangle4']:
+        imgs = []
+        train_commands.append(Train_command())
+        train_commands[i].name = 'triangle'
+        filename = Command + '.jpg'
+        imgs.append(cv2.imread(filepath+filename, cv2.IMREAD_GRAYSCALE))
+        train_commands[i].img = imgs
+        i = i + 1
+           
     return train_commands
 
 train_commands = load_commands( path + '/Commands_Imgs/')
@@ -66,6 +105,7 @@ def find_cnts_commands(thresh_image):
         peri = cv2.arcLength(cnts[i],True)
         approx = cv2.approxPolyDP(cnts[i],0.01*peri,True)
         if len(approx) == 4 and (size < COMMAND_MAX_AREA) and (size > COMMAND_MIN_AREA):
+                #print(size)
                 cnts_return.append(cnts[i])
     return cnts_return, len(cnts), len(cnts_return)
 
@@ -98,7 +138,6 @@ def find_commands(cnts, image):
         for x in range(len(cnts_order[y])):  
             qCommand = Query_command()
             qCommand = preprocess_command(cnts_order[y][x],image)
-            #cv2.imwrite(str(x+y) +".jpeg", qCommand.command_img);     
             best_command_match, diff = match_command(qCommand,train_commands)
             if(best_command_match != "Unknown"):
                 qCommand.best_command_match, qCommand.diff = best_command_match, diff
@@ -110,7 +149,6 @@ def find_commands(cnts, image):
     return commands 
 
 def check_line(line_commands, img):
-    teste = []
     for x in range(len(line_commands)):  
         for y in range(x+1, len(line_commands)):
             if intersection(line_commands[x].contour, line_commands[y].contour):
@@ -137,15 +175,17 @@ def intersection(cnt1, cnt2):
 def match_command(qCommand, train_command):
     best_command_match_diff = 1000000000
     best_command_match_name = "Unknown"
+    best_command_name = "Unknown"
     i = 0
     retval, qCommand.command_img = cv2.threshold(qCommand.command_img, 100, 255, cv2. THRESH_BINARY)
     if (len(qCommand.command_img) != 0):
         for Tcommand in train_command:
-            err = np.sum((Tcommand.img.astype("float") - qCommand.command_img.astype("float")) ** 2)
-            err /= float(qCommand.command_img.shape[0] * qCommand.command_img.shape[1]) 
-            if err < best_command_match_diff:
-                best_command_match_diff = err
-                best_command_name = Tcommand.name
+            for img in Tcommand.img:
+                err = np.sum((img.astype("float") - qCommand.command_img.astype("float")) ** 2)
+                err /= float(img.shape[0] * img.shape[1]) 
+                if err < best_command_match_diff:
+                    best_command_match_diff = err
+                    best_command_name = Tcommand.name
     if (best_command_match_diff < RANK_DIFF_MAX):
         best_command_match_name = best_command_name
     return best_command_match_name, best_command_match_diff
@@ -168,10 +208,8 @@ def responseCommands(commands):
 def preprocess_command(contour, image):
     qCommand = Query_command()
     qCommand.contour = contour
-    # Find width and height of card's bounding rectangle
     qCommand.width, qCommand.height,qCommand.x, qCommand.y = cv2.boundingRect(contour)
     qCommand.rect = (qCommand.width, qCommand.height,qCommand.x, qCommand.y)
-    # Find center point of card by taking x and y average of the four corners.
     qCommand.center, pts = define_center(contour)
     qCommand.command_img = flattener(image, pts, qCommand.width, qCommand.height)
     return qCommand
@@ -207,8 +245,8 @@ def flattener(image, pts, w, h):
     temp_rect[2] = br
     temp_rect[3] = bl
 
-    maxWidth = 168
-    maxHeight = 148
+    maxWidth = 185
+    maxHeight = 185
     dst = np.array([[0,0],[maxWidth-1,0],[maxWidth-1,maxHeight-1],[0, maxHeight-1]], np.float32)
  
     M = cv2.getPerspectiveTransform(temp_rect,dst)

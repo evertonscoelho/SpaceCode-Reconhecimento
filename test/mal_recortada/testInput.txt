@@ -1,0 +1,7 @@
+1.jpg;triangle,circle,left,next,left,2
+2.jpg;triangle,circle,left,next,left,2
+3.jpg;triangle,circle,left,next,left,2
+4.jpg;triangle,circle,left,next,left,2
+5.jpg;circle,triangle,star,next,circle,triangle,star,next,circle,triangle,star
+6.jpg;circle,triangle,star,next,circle,triangle,star,next,circle,triangle,star
+7.jpg;circle,triangle,star,next,circle,triangle,star,next,circle,triangle,star
